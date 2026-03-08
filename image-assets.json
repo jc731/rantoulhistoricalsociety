@@ -1,0 +1,60 @@
+{
+  "image_assets": [
+    {
+      "file_name": "rantoul-historical-society-museum-building-exterior.jpg",
+      "dimensions": "3224x1610",
+      "file_size": "674.55KB",
+      "category": "Facilities",
+      "alt_text": "Exterior view of the Rantoul Historical Society & Museum building.",
+      "description": "Main exterior of the museum featuring the brick building and arched entryway."
+    },
+    {
+      "file_name": "rantoul-historical-society-one-room-schoolhouse-exhibit.jpg",
+      "dimensions": "2048x1536",
+      "file_size": "627.52KB",
+      "category": "Education",
+      "alt_text": "A museum exhibit of a 19th-century classroom featuring wooden desks, a mannequin teacher, and a chalkboard.",
+      "description": "Recreation of a rural Illinois one-room schoolhouse."
+    },
+    {
+      "file_name": "chanute-air-force-base-commemorative-mug-rantoul.jpg",
+      "dimensions": "960x720",
+      "file_size": "28.76KB",
+      "category": "Military",
+      "alt_text": "A white ceramic mug with the Chanute logo and text: End of an Era, 1917-1993.",
+      "description": "Chanute AFB commemorative mug marking the base closure."
+    },
+    {
+      "file_name": "illinois-central-railroad-museum-display-rantoul.jpg",
+      "dimensions": "2040x1530",
+      "file_size": "540.16KB",
+      "category": "Transportation",
+      "alt_text": "A railroad history display featuring an I.C.R.R. sign and a conductor mannequin.",
+      "description": "Railroad history display with I.C.R.R. signage and conductor artifacts."
+    },
+    {
+      "file_name": "rantoul-agricultural-history-plows-exhibit.jpg",
+      "dimensions": "2040x1530",
+      "file_size": "489.57KB",
+      "category": "Agriculture",
+      "alt_text": "A museum wall of historical photos with vintage horse-drawn plows in the foreground.",
+      "description": "Vintage horse-drawn plows and local history photographic wall."
+    },
+    {
+      "file_name": "sandy-mechanical-horse-ride-rantoul-museum.jpg",
+      "dimensions": "2048x1365",
+      "file_size": "334.76KB",
+      "category": "Nostalgia",
+      "alt_text": "A vintage Sandy mechanical horse ride in front of a museum counter.",
+      "description": "Vintage Sandy the mechanical horse grocery store ride."
+    },
+    {
+      "file_name": "vintage-magneto-wall-telephones-collection.jpg",
+      "dimensions": "2040x1530",
+      "file_size": "443.33KB",
+      "category": "Technology",
+      "alt_text": "A glass display case containing several antique wooden wall-mounted telephones.",
+      "description": "Antique wooden wall-mounted telephones with hand-crank magnetos."
+    }
+  ]
+}

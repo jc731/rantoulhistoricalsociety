@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Card from '../components/Card.astro';
+import { events } from '../data/events';
+import { contact } from '../data/contact';
+---
+
+<BaseLayout
+  title="Events"
+  description="Upcoming programs and events at the Rantoul Historical Society. Check back or follow us on Facebook for the latest."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Events</h1>
+      <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+        Programs and events at the museum. <!-- TODO: Replace with CMS-driven content when available. -->
+      </p>
+    </div>
+  </header>
+
+  <Section title="Upcoming Events" id="upcoming">
+    {events.length > 0 ? (
+      <div class="grid gap-6 sm:grid-cols-2">
+        {events.map((event) => (
+          <Card title={event.title} href={event.id !== 'placeholder' ? `/events/${event.id}` : undefined}>
+            {event.date && <p class="font-medium text-[var(--color-ink)]">{event.date}</p>}
+            <p>{event.description}</p>
+          </Card>
+        ))}
+      </div>
+    ) : (
+      <p class="text-[var(--color-ink-muted)]">
+        No upcoming events listed. Check our <a href={contact.facebook} target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:underline">Facebook page</a> or <a href="/contact" class="text-[var(--color-accent)] hover:underline">contact us</a> for the latest.
+      </p>
+    )}
+  </Section>
+</BaseLayout>

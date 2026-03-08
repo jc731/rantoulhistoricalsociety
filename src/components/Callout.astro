@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  /** Optional CTA label */
+  ctaText?: string;
+  ctaHref?: string;
+  /** Soft style (e.g. for support message) */
+  soft?: boolean;
+}
+
+const { title, ctaText, ctaHref, soft = false } = Astro.props;
+---
+
+<section
+  class:list={[
+    'rounded-lg p-6 text-center',
+    soft ? 'bg-[var(--color-accent-light)] text-[var(--color-ink)]' : 'bg-[var(--color-paper-dark)]',
+  ]}
+  aria-labelledby="callout-heading"
+>
+  <h2 id="callout-heading" class="font-heading text-xl font-semibold mb-2">
+    {title}
+  </h2>
+  <div class="prose prose-inherit max-w-none mb-4">
+    <slot />
+  </div>
+  {ctaText && ctaHref && (
+    <a
+      href={ctaHref}
+      class="inline-flex items-center justify-center rounded-md px-5 py-2.5 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+    >
+      {ctaText}
+    </a>
+  )}
+</section>

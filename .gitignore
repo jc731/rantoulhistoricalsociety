@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnpm/
+
+# Astro
+.astro/
+
+# Build output
+dist/
+
+# Environment
+.env
+.env.*
+!.env.example
+.pnpm/*
+.cursor*
+.cursorrules
+.cursorrules.md
+.cursorrules.txt
+.cursorrules.yml
+.cursorrules.yaml
+.cursorrules.json
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Optional: keep pnpm-lock.yaml committed for reproducible installs

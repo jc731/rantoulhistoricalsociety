@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+/* Design tokens — warm neutrals, dark ink, single accent (museum/archival) */
+@theme {
+  /* Warm paper/cream background */
+  --color-paper: #f8f6f2;
+  --color-paper-dark: #ebe7df;
+  /* Dark ink text */
+  --color-ink: #1a1a1a;
+  --color-ink-muted: #4a4a4a;
+  /* Accent — use sparingly for links/buttons (inspired by classic museum tone) */
+  --color-accent: #6b4e3d;
+  --color-accent-hover: #5a4032;
+  --color-accent-light: #e8e2dc;
+  /* Typography */
+  --font-heading: 'Georgia', 'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Focus visible for accessibility */
+:where(a:focus-visible, button:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  text-decoration: none;
+  border-radius: 0.25rem;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0.5rem;
+}

@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import { contact } from '../data/contact';
+---
+
+<BaseLayout
+  title="Visit"
+  description="Visit the Rantoul Historical Society Museum at 1040 Klein Ave., Rantoul, IL. Free admission. Open Tue, Fri, Sat 10 AM–5 PM; Sun 12–4 PM."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Visiting the Museum</h1>
+      <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+        The Rantoul Historical Society Museum welcomes visitors interested in learning more about the community's history.
+      </p>
+    </div>
+  </header>
+
+  <Section title="Location" id="location">
+    <p class="text-[var(--color-ink)] font-medium">
+      {contact.address.line}
+    </p>
+    <p class="mt-2 text-sm text-[var(--color-ink-muted)]">
+      Directions and parking information available upon request.
+    </p>
+  </Section>
+
+  <Section title="Admission" id="admission">
+    <p class="text-[var(--color-ink-muted)]">
+      Admission is free. Free-will donations are appreciated and help support preservation efforts.
+    </p>
+  </Section>
+
+  <Section title="Hours" id="hours">
+    <p class="text-[var(--color-ink-muted)] mb-4">
+      {contact.hoursNote}
+    </p>
+    <table class="w-full max-w-sm border border-[var(--color-paper-dark)] text-[var(--color-ink)]" aria-label="Museum hours by day">
+      <thead>
+        <tr class="bg-[var(--color-paper-dark)]">
+          <th scope="col" class="text-left py-2 px-3 font-semibold">Day</th>
+          <th scope="col" class="text-left py-2 px-3 font-semibold">Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        {contact.hoursSchedule.map((row) => (
+          <tr class="border-t border-[var(--color-paper-dark)]">
+            <td class="py-2 px-3">{row.day}</td>
+            <td class="py-2 px-3">{row.closed ? 'Closed' : `${row.open} – ${row.close}`}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <a
+      href={contact.facebook}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-4 inline-block text-[var(--color-accent)] font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+    >
+      Check our Facebook page for updates →
+    </a>
+  </Section>
+
+  <Section title="What to Expect" id="expect">
+    <p class="text-[var(--color-ink-muted)]">
+      The museum houses artifacts, photographs, documents, and memorabilia that tell the story of Rantoul and the surrounding area. Exhibits cover themes including early settlement, the railroad, Chanute Air Force Base, local businesses and civic life, and family histories. We recommend allowing at least an hour for your visit.
+    </p>
+  </Section>
+</BaseLayout>

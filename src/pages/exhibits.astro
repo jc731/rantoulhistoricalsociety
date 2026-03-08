@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Card from '../components/Card.astro';
+import { exhibits } from '../data/exhibits';
+import { getImageAssets } from '../data/image-assets';
+---
+
+<BaseLayout
+  title="Exhibits"
+  description="Explore exhibits at the Rantoul Historical Society Museum: railroad history, Chanute Air Force Base, everyday life, and more."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Exhibits</h1>
+      <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+        Our museum highlights the people, places, and events that shaped Rantoul — from early settlement to Chanute AFB and beyond.
+      </p>
+    </div>
+  </header>
+
+  <Section title="Current Exhibits" id="current">
+    <p class="text-[var(--color-ink-muted)] mb-8">
+      Exhibits evolve as new materials are collected. Below are key themes you can explore. <!-- TODO: Add specific exhibit names when provided by stakeholder. -->
+    </p>
+    <div class="grid gap-6 sm:grid-cols-2">
+      {exhibits.map((exhibit) => (
+        <Card title={exhibit.title}>
+          <p>{exhibit.description}</p>
+        </Card>
+      ))}
+    </div>
+  </Section>
+
+  <Section title="Gallery" id="gallery">
+    <p class="text-[var(--color-ink-muted)] mb-6">
+      A selection of museum photography. All captions and alt text are sourced from the project image registry.
+    </p>
+    <!-- Placeholder: full gallery can pull from getImageAssets() and render OptimizedImage when images are imported per page. -->
+    <p class="text-sm text-[var(--color-ink-muted)]">
+      Gallery of {getImageAssets().length} registered images can be expanded here with OptimizedImage components and category filters.
+    </p>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+import MetaHead from '../components/MetaHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { contact } from '../data/contact';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+
+const { title, description, canonical } = Astro.props;
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Museum',
+  name: contact.name,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: contact.address.street,
+    addressLocality: contact.address.city,
+    addressRegion: contact.address.state,
+    postalCode: contact.address.zip,
+  },
+  url: Astro.url.origin,
+  description: 'A volunteer-driven nonprofit museum dedicated to preserving and sharing the history of Rantoul, Illinois and the surrounding area.',
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <MetaHead title={title} description={description} canonical={canonical} />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <Header />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

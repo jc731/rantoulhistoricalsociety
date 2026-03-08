@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Callout from '../components/Callout.astro';
+import { getHomeBannerAsset, getPublicImageUrl, HOME_BANNER_FILE_NAME } from '../data/image-assets';
+
+const buildingAsset = getHomeBannerAsset();
+---
+
+<BaseLayout
+  title="Home"
+  description="Discover Rantoul's story at the Rantoul Historical Society & Museum. Preserving local history from railroad and Chanute AFB to everyday community life. Plan your visit."
+>
+  <Hero
+    headline="Discover Rantoul's Story"
+    intro="Explore the people, places, and moments that shaped our community — from early settlement and the railroad to Chanute Air Force Base and beyond."
+    bannerFileName={HOME_BANNER_FILE_NAME}
+    bannerAlt={buildingAsset?.alt_text}
+    primaryCta={{ label: 'Plan Your Visit', href: '/visit' }}
+    secondaryCta={{ label: 'Explore the Museum', href: '/exhibits' }}
+    supportCta={{ label: 'Support the Society', href: '/support' }}
+  />
+
+  <Section title="Why This Museum Matters" id="why">
+    <p class="text-lg text-[var(--color-ink-muted)] max-w-2xl">
+      The Rantoul Historical Society preserves local history that might otherwise be lost. We collect and share artifacts, photographs, and stories that reflect everyday life, local institutions, and the major events that shaped our town — so residents and visitors can explore, understand, and appreciate how the past shapes the present.
+    </p>
+  </Section>
+
+  <Section title="What You'll See" id="what">
+    {buildingAsset && (
+      <figure class="mb-6 max-w-2xl">
+        <img
+          src={getPublicImageUrl(HOME_BANNER_FILE_NAME)}
+          alt={buildingAsset.alt_text}
+          width="800"
+          height="400"
+          class="rounded-lg w-full h-auto"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-2 text-sm text-[var(--color-ink-muted)]">{buildingAsset.description}</figcaption>
+      </figure>
+    )}
+    <p class="text-[var(--color-ink-muted)] mb-6">
+      Our exhibits highlight themes such as early settlement and town development, the railroad and its role in shaping Rantoul, Chanute Air Force Base and its impact on the community, and local businesses, schools, and civic life. Family histories and personal artifacts donated by residents bring these stories to life.
+    </p>
+    <a href="/exhibits" class="text-[var(--color-accent)] font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded">
+      Explore exhibits →
+    </a>
+  </Section>
+
+  <Section title="Plan a Visit" id="visit">
+    <p class="text-[var(--color-ink-muted)] mb-4">
+      We're located at <strong class="text-[var(--color-ink)]">1040 Klein Avenue, Rantoul, Illinois</strong>. Admission is free; free-will donations are appreciated.
+    </p>
+    <p class="text-[var(--color-ink-muted)] mb-4">
+      Open Tue, Fri & Sat 10 AM–5 PM; Sun 12–4 PM. <a href="/visit" class="text-[var(--color-accent)] hover:underline">Full hours</a> and <a href="/contact" class="text-[var(--color-accent)] hover:underline">contact info</a>.
+    </p>
+    <a href="/visit" class="inline-flex items-center justify-center rounded-md px-5 py-2.5 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2">
+      Visit details
+    </a>
+  </Section>
+
+  <Section id="support-cta">
+    <Callout title="Help keep local history accessible" soft ctaText="Support the Society" ctaHref="/support">
+      <p>
+        The Society relies on members, volunteers, and community support to preserve Rantoul's history. Your support helps maintain the museum and make our shared heritage available to everyone.
+      </p>
+    </Callout>
+  </Section>
+</BaseLayout>

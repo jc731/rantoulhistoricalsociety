@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  /** Optional link wrapping the card */
+  href?: string;
+  class?: string;
+}
+
+const { title, href, class: className = '' } = Astro.props;
+---
+
+<div class={`rounded-lg border border-[var(--color-paper-dark)] bg-white p-5 shadow-sm ${className}`}>
+  {href ? (
+    <a href={href} class="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded-lg -m-5 p-5">
+      <h3 class="font-heading text-lg font-semibold text-[var(--color-accent)] group-hover:underline">
+        {title}
+      </h3>
+      <div class="mt-2 text-[var(--color-ink-muted)]">
+        <slot />
+      </div>
+    </a>
+  ) : (
+    <>
+      <h3 class="font-heading text-lg font-semibold text-[var(--color-ink)]">{title}</h3>
+      <div class="mt-2 text-[var(--color-ink-muted)]">
+        <slot />
+      </div>
+    </>
+  )}
+</div>

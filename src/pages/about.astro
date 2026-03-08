@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="The Rantoul Historical Society is a volunteer-driven nonprofit dedicated to collecting, preserving, and sharing the history of Rantoul, Illinois and the surrounding area."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">About the Rantoul Historical Society</h1>
+    </div>
+  </header>
+
+  <Section title="" id="about" narrow>
+    <p class="mb-6">
+      The Rantoul Historical Society is a volunteer-driven nonprofit organization dedicated to collecting, preserving, and sharing the history of Rantoul, Illinois and the surrounding area.
+    </p>
+    <p class="mb-6">
+      Located at <strong>1040 Klein Avenue</strong>, the Society operates a local history museum that houses artifacts, photographs, documents, and memorabilia donated by members of the community. Together, these items tell the story of Rantoul's people, institutions, and everyday life across generations.
+    </p>
+    <p class="mb-8">
+      The Society focuses on preserving local history that might otherwise be lost — from early settlement and railroad development to the profound influence of Chanute Air Force Base and the community's continued evolution after its closure.
+    </p>
+  </Section>
+
+  <Section title="Mission Statement" id="mission" narrow>
+    <p class="text-lg text-[var(--color-ink-muted)]">
+      The mission of the Rantoul Historical Society is to preserve and interpret the history of Rantoul and its region, educate the public about our shared heritage, and promote community pride through accessible exhibits, research resources, and educational opportunities.
+    </p>
+  </Section>
+
+  <Section title="Vision Statement" id="vision" narrow>
+    <p class="text-[var(--color-ink-muted)]">
+      The Rantoul Historical Society envisions a community where residents and visitors can explore, understand, and appreciate the unique history of Rantoul — recognizing how the past shapes the present and informs the future.
+    </p>
+  </Section>
+
+  <Section title="What We Do" id="what-we-do" narrow>
+    <ul class="list-disc pl-6 space-y-2 text-[var(--color-ink-muted)]">
+      <li>Collect and preserve historical artifacts, photographs, and documents related to Rantoul and the surrounding area</li>
+      <li>Maintain a local history museum open to the public</li>
+      <li>Share stories that reflect everyday life, local institutions, and major events in the community</li>
+      <li>Provide educational resources for students, researchers, and history enthusiasts</li>
+      <li>Serve as a steward of Rantoul's historical identity for future generations</li>
+    </ul>
+  </Section>
+
+  <Section title="Our Museum" id="museum" narrow>
+    <p class="mb-4 text-[var(--color-ink-muted)]">
+      The Society's museum serves as a community archive and storytelling space. Exhibits highlight themes such as:
+    </p>
+    <ul class="list-disc pl-6 space-y-2 text-[var(--color-ink-muted)] mb-6">
+      <li>Early settlement and town development</li>
+      <li>The railroad and its role in shaping Rantoul</li>
+      <li>Chanute Air Force Base and its impact on the community</li>
+      <li>Local businesses, schools, and civic life</li>
+      <li>Family histories and personal artifacts donated by residents</li>
+    </ul>
+    <p class="text-[var(--color-ink-muted)]">
+      Exhibits evolve over time as new materials are collected and stories are shared.
+    </p>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import { contact } from '../data/contact';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact the Rantoul Historical Society. Visit 1040 Klein Ave., Rantoul, IL; email, call Jim Cheek 217.714.1352, or find us on Facebook."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Contact Us</h1>
+      <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+        Get in touch with the Rantoul Historical Society for hours, visits, or support.
+      </p>
+    </div>
+  </header>
+
+  <Section title="Stop by" id="location">
+    <p class="text-[var(--color-ink)] font-medium">
+      {contact.address.line}
+    </p>
+  </Section>
+
+  <Section title="Call" id="call">
+    <p class="text-[var(--color-ink)]">
+      {contact.phone.name}: <a href={`tel:${contact.phone.number.replace(/\D/g, '')}`} class="text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded">{contact.phone.number}</a>
+    </p>
+  </Section>
+
+  <Section title="Email" id="email">
+    <p class="text-[var(--color-ink)]">
+      <a href={`mailto:${contact.email}`} class="text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded">{contact.email}</a>
+    </p>
+  </Section>
+
+  <Section title="Connect" id="connect">
+    <p class="text-[var(--color-ink-muted)] mb-2">
+      Follow us on Facebook for the latest news, hours, and events:
+    </p>
+    <a
+      href={contact.facebook}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-[var(--color-accent)] font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+    >
+      Rantoul Historical Society on Facebook
+    </a>
+  </Section>
+
+  <Section title="Hours" id="hours">
+    <p class="text-[var(--color-ink-muted)] mb-4">
+      {contact.hoursNote}
+    </p>
+    <table class="w-full max-w-sm border border-[var(--color-paper-dark)] text-[var(--color-ink)]" aria-label="Museum hours by day">
+      <thead>
+        <tr class="bg-[var(--color-paper-dark)]">
+          <th scope="col" class="text-left py-2 px-3 font-semibold">Day</th>
+          <th scope="col" class="text-left py-2 px-3 font-semibold">Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        {contact.hoursSchedule.map((row) => (
+          <tr class="border-t border-[var(--color-paper-dark)]">
+            <td class="py-2 px-3">{row.day}</td>
+            <td class="py-2 px-3">{row.closed ? 'Closed' : `${row.open} – ${row.close}`}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </Section>
+</BaseLayout>
