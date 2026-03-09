@@ -8,7 +8,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.0.0"
+    "@astrojs/netlify": "^6.6.4",
+    "astro": "^5.0.0",
+    "netlify": "^24.0.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",

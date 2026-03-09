@@ -1,0 +1,11 @@
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - a
+  - b
+  - e
+  - esbuild
+  - netlify
+  - p
+  - s
+  - u
+  - unix-dgram

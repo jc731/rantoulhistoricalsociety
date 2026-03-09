@@ -39,3 +39,6 @@ Thumbs.db
 *~
 
 # Optional: keep pnpm-lock.yaml committed for reproducible installs
+
+# Local Netlify folder
+.netlify
