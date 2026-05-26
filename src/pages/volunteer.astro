@@ -1,0 +1,235 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+
+const input = 'w-full rounded border border-[var(--color-paper-dark)] bg-white px-3 py-2.5 text-sm text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2';
+const label = 'block text-sm font-medium text-[var(--color-ink)] mb-1';
+const checkLabel = 'flex items-start gap-2.5 text-sm text-[var(--color-ink-muted)] cursor-pointer';
+const checkInput = 'mt-0.5 h-4 w-4 rounded border-[var(--color-paper-dark)] accent-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 shrink-0';
+
+const availabilityOptions = [
+  { value: 'weekday-mornings', label: 'Weekday mornings' },
+  { value: 'weekday-afternoons', label: 'Weekday afternoons' },
+  { value: 'weekends', label: 'Weekends' },
+  { value: 'special-events-only', label: 'Special events only' },
+  { value: 'flexible', label: 'Flexible' },
+];
+
+const interestOptions = [
+  { value: 'greeting-visitors', label: 'Greeting visitors / front desk' },
+  { value: 'exhibit-assistance', label: 'Exhibit assistance' },
+  { value: 'research-archives', label: 'Research / archives' },
+  { value: 'events', label: 'Events' },
+  { value: 'maintenance-grounds', label: 'Maintenance / grounds' },
+  { value: 'social-media-marketing', label: 'Social media / marketing' },
+  { value: 'wherever-needed', label: 'Wherever needed' },
+];
+
+const ageOptions = [
+  { value: 'under-18', label: 'Under 18' },
+  { value: '18-64', label: '18–64' },
+  { value: '65-plus', label: '65+' },
+];
+---
+
+<BaseLayout
+  title="Volunteer"
+  description="Volunteer with the Rantoul Historical Society. Help preserve and share the history of Rantoul, Illinois."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Volunteer with Us</h1>
+      <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+        The Rantoul Historical Society is a volunteer-driven organization. We'd love your help.
+      </p>
+    </div>
+  </header>
+
+  <Section id="volunteer-intro" narrow>
+    <p class="text-[var(--color-ink-muted)] mb-4">
+      Volunteers are the heart of the Society. Whether you can give a few hours a month or more, there's a meaningful way to contribute — welcoming visitors, assisting with exhibits, researching local history, or helping with events.
+    </p>
+    <p class="text-[var(--color-ink-muted)]">
+      Fill out the form below and we'll be in touch to find a good fit.
+    </p>
+  </Section>
+
+  <Section id="volunteer-form" narrow>
+    <form
+      id="volunteer-application"
+      name="volunteer"
+      method="POST"
+      action="/thank-you"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      class="space-y-6"
+      novalidate
+    >
+      <input type="hidden" name="form-name" value="volunteer" />
+      <p class="hidden" aria-hidden="true">
+        <label>Do not fill this out: <input name="bot-field" /></label>
+      </p>
+
+      <!-- Name -->
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="vol-first-name" class={label}>
+            First name <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="vol-first-name" name="first-name" required autocomplete="given-name" class={input} />
+        </div>
+        <div>
+          <label for="vol-last-name" class={label}>
+            Last name <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="vol-last-name" name="last-name" required autocomplete="family-name" class={input} />
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="vol-email" class={label}>
+            Email <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="email" id="vol-email" name="email" required autocomplete="email" class={input} />
+        </div>
+        <div>
+          <label for="vol-phone" class={label}>
+            Phone <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="tel" id="vol-phone" name="phone" required autocomplete="tel" class={input} />
+        </div>
+      </div>
+
+      <!-- Age range -->
+      <fieldset>
+        <legend class="text-sm font-medium text-[var(--color-ink)] mb-2">
+          Age range <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+        </legend>
+        <div class="flex flex-wrap gap-4">
+          {ageOptions.map((opt) => (
+            <label class="flex items-center gap-2 text-sm text-[var(--color-ink-muted)] cursor-pointer">
+              <input
+                type="radio"
+                name="age-range"
+                value={opt.value}
+                required
+                class="h-4 w-4 accent-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+              />
+              {opt.label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <!-- Availability -->
+      <fieldset>
+        <legend class="text-sm font-medium text-[var(--color-ink)] mb-2">
+          Availability <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          <span class="font-normal text-[var(--color-ink-muted)]">(select all that apply)</span>
+        </legend>
+        <div class="grid gap-2 sm:grid-cols-2">
+          {availabilityOptions.map((opt) => (
+            <label class={checkLabel}>
+              <input type="checkbox" name="availability" value={opt.value} class={checkInput} />
+              {opt.label}
+            </label>
+          ))}
+        </div>
+        <p id="availability-error" class="mt-2 text-sm text-red-600 hidden" role="alert">
+          Please select at least one availability option.
+        </p>
+      </fieldset>
+
+      <!-- Areas of interest -->
+      <fieldset>
+        <legend class="text-sm font-medium text-[var(--color-ink)] mb-2">
+          Areas of interest <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          <span class="font-normal text-[var(--color-ink-muted)]">(select all that apply)</span>
+        </legend>
+        <div class="grid gap-2 sm:grid-cols-2">
+          {interestOptions.map((opt) => (
+            <label class={checkLabel}>
+              <input type="checkbox" name="areas-of-interest" value={opt.value} class={checkInput} />
+              {opt.label}
+            </label>
+          ))}
+        </div>
+        <p id="interest-error" class="mt-2 text-sm text-red-600 hidden" role="alert">
+          Please select at least one area of interest.
+        </p>
+      </fieldset>
+
+      <!-- Experience -->
+      <div>
+        <label for="vol-experience" class={label}>
+          Relevant experience or skills <span class="text-[var(--color-ink-muted)] font-normal">(optional)</span>
+        </label>
+        <textarea
+          id="vol-experience"
+          name="experience"
+          rows="4"
+          class={`${input} resize-y`}
+          placeholder="Anything you'd like us to know — previous volunteer work, relevant skills, interests in local history, etc."
+        ></textarea>
+      </div>
+
+      <!-- Referral -->
+      <div>
+        <label for="vol-referral" class={label}>
+          How did you hear about us? <span class="text-[var(--color-ink-muted)] font-normal">(optional)</span>
+        </label>
+        <input type="text" id="vol-referral" name="how-did-you-hear" class={input} />
+      </div>
+
+      <p class="text-xs text-[var(--color-ink-muted)]">
+        Required fields marked <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+      </p>
+
+      <button
+        id="vol-submit"
+        type="submit"
+        class="w-full inline-flex items-center justify-center rounded-md px-6 py-3 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+      >
+        Submit application
+      </button>
+    </form>
+  </Section>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('volunteer-application');
+    if (!form) return;
+
+    const availabilityError = document.getElementById('availability-error');
+    const interestError = document.getElementById('interest-error');
+
+    form.addEventListener('submit', function (e) {
+      let valid = true;
+
+      const availChecked = form.querySelectorAll('input[name="availability"]:checked').length > 0;
+      if (!availChecked) {
+        availabilityError.hidden = false;
+        valid = false;
+      } else {
+        availabilityError.hidden = true;
+      }
+
+      const interestChecked = form.querySelectorAll('input[name="areas-of-interest"]:checked').length > 0;
+      if (!interestChecked) {
+        interestError.hidden = false;
+        valid = false;
+      } else {
+        interestError.hidden = true;
+      }
+
+      if (!valid) {
+        e.preventDefault();
+        const firstError = form.querySelector('[role="alert"]:not([hidden])');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  })();
+</script>

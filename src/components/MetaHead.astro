@@ -2,18 +2,33 @@
 interface Props {
   title: string;
   description: string;
-  /** Optional canonical URL */
   canonical?: string;
 }
 
 const { title, description, canonical } = Astro.props;
 const siteTitle = 'Rantoul Historical Society & Museum';
 const fullTitle = title === 'Home' ? siteTitle : `${title} | ${siteTitle}`;
+const canonicalUrl = canonical ?? Astro.url.href;
+const ogImage = new URL('/images/rantoul-historical-society-museum-building-exterior.jpg', Astro.site).href;
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
-{canonical && <link rel="canonical" href={canonical} />}
+<link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteTitle} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

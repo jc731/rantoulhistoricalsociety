@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import Callout from '../components/Callout.astro';
 import { getHomeBannerAsset, getPublicImageUrl, HOME_BANNER_FILE_NAME } from '../data/image-assets';
+import { tagline } from '../data/site';
 
 const buildingAsset = getHomeBannerAsset();
 ---
@@ -14,7 +15,7 @@ const buildingAsset = getHomeBannerAsset();
 >
   <Hero
     headline="Discover Rantoul's Story"
-    intro="Explore the people, places, and moments that shaped our community — from early settlement and the railroad to Chanute Air Force Base and beyond."
+    intro={tagline}
     bannerFileName={HOME_BANNER_FILE_NAME}
     bannerAlt={buildingAsset?.alt_text}
     primaryCta={{ label: 'Plan Your Visit', href: '/visit' }}
@@ -56,7 +57,7 @@ const buildingAsset = getHomeBannerAsset();
       We're located at <strong class="text-[var(--color-ink)]">1040 Klein Avenue, Rantoul, Illinois</strong>. Admission is free; free-will donations are appreciated.
     </p>
     <p class="text-[var(--color-ink-muted)] mb-4">
-      Open Tue, Fri & Sat 10 AM–5 PM; Sun 12–4 PM. <a href="/visit" class="text-[var(--color-accent)] hover:underline">Full hours</a> and <a href="/contact" class="text-[var(--color-accent)] hover:underline">contact info</a>.
+      Open Tue, Fri &amp; Sat 10 AM–3 PM; Sun 12–3 PM. <a href="/visit" class="text-[var(--color-accent)] hover:underline">Full hours</a> and <a href="/contact" class="text-[var(--color-accent)] hover:underline">contact info</a>.
     </p>
     <a href="/visit" class="inline-flex items-center justify-center rounded-md px-5 py-2.5 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2">
       Visit details

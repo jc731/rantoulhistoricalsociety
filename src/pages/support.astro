@@ -2,17 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import Card from '../components/Card.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
 import { contact } from '../data/contact';
-import {
-  membershipLevels,
-  membershipCheckPayable,
-  membershipMailInstructions,
-} from '../data/membership';
+import { membershipLevels } from '../data/membership';
+
+const inp = 'w-full rounded border border-[var(--color-paper-dark)] bg-white px-3 py-2.5 text-sm text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2';
+const lbl = 'block text-sm font-medium text-[var(--color-ink)] mb-1';
+
+const paypalUrlMap = Object.fromEntries(
+  membershipLevels.map((lvl) => [lvl.id, lvl.paypal_url])
+);
 ---
 
 <BaseLayout
   title="Support"
-  description="Support the Rantoul Historical Society through membership, volunteering, artifact donations, or financial contributions. Online donations planned for the future."
+  description="Support the Rantoul Historical Society through membership, volunteering, or donations. Join today and help preserve Rantoul's history."
 >
   <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
     <div class="mx-auto max-w-3xl">
@@ -28,15 +32,16 @@ import {
       <li>Becoming a member</li>
       <li>Volunteering your time</li>
       <li>Donating artifacts or historical materials</li>
-      <li>Making financial contributions (online donations planned for the future)</li>
+      <li>Making financial contributions</li>
     </ul>
   </Section>
 
+  <!-- Tier info cards -->
   <Section title="Be a part of preserving Rantoul's history!" id="membership">
     <p class="text-[var(--color-ink-muted)] mb-8 max-w-2xl">
       Membership directly supports the museum's day-to-day work: caring for artifacts, sharing stories with visitors, and keeping local history accessible. When you join, you're helping ensure that the people, places, and moments that shaped Rantoul stay part of the community's story.
     </p>
-    <div class="grid gap-6 sm:grid-cols-2 mb-10">
+    <div class="grid gap-6 sm:grid-cols-2">
       {membershipLevels.map((level) => (
         <Card title={level.name}>
           <p class="text-[var(--color-ink)] font-semibold mb-2">
@@ -46,41 +51,209 @@ import {
         </Card>
       ))}
     </div>
-    <div class="rounded-lg border border-[var(--color-paper-dark)] bg-[var(--color-paper-dark)] p-6 max-w-2xl">
-      <h3 class="font-heading text-lg font-semibold text-[var(--color-ink)] mb-3">How to join</h3>
-      <p class="text-[var(--color-ink-muted)] mb-2">
-        Make checks payable to: <strong class="text-[var(--color-ink)]">{membershipCheckPayable}</strong>
+  </Section>
+
+  <!-- Membership sign-up form -->
+  <Section title="Join the Society" id="join">
+    <p class="text-[var(--color-ink-muted)] mb-8 max-w-2xl">
+      Fill out the form below and you'll be taken to PayPal to complete payment for your selected tier.
+    </p>
+
+    <form
+      id="membership-form"
+      name="membership"
+      method="POST"
+      action="/thank-you"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      class="max-w-2xl space-y-6"
+      novalidate
+    >
+      <input type="hidden" name="form-name" value="membership" />
+      <p class="hidden" aria-hidden="true">
+        <label>Do not fill this out: <input name="bot-field" /></label>
       </p>
-      <p class="text-[var(--color-ink-muted)] mb-2">
-        {membershipMailInstructions}
+
+      <!-- Name -->
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="mem-first-name" class={lbl}>
+            First name <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="mem-first-name" name="first-name" required autocomplete="given-name" class={inp} />
+        </div>
+        <div>
+          <label for="mem-last-name" class={lbl}>
+            Last name <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="mem-last-name" name="last-name" required autocomplete="family-name" class={inp} />
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="mem-email" class={lbl}>
+            Email <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="email" id="mem-email" name="email" required autocomplete="email" class={inp} />
+        </div>
+        <div>
+          <label for="mem-phone" class={lbl}>
+            Phone <span class="text-[var(--color-ink-muted)] font-normal">(optional)</span>
+          </label>
+          <input type="tel" id="mem-phone" name="phone" autocomplete="tel" class={inp} />
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div>
+        <label for="mem-street" class={lbl}>
+          Street address <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+        </label>
+        <input type="text" id="mem-street" name="street-address" required autocomplete="street-address" class={inp} />
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div>
+          <label for="mem-city" class={lbl}>
+            City <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="mem-city" name="city" required autocomplete="address-level2" class={inp} />
+        </div>
+        <div>
+          <label for="mem-state" class={lbl}>
+            State <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="mem-state" name="state" required value="IL" maxlength="2" autocomplete="address-level1" class={inp} />
+        </div>
+        <div>
+          <label for="mem-zip" class={lbl}>
+            ZIP <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="mem-zip" name="zip" required inputmode="numeric" maxlength="10" autocomplete="postal-code" class={inp} />
+        </div>
+      </div>
+
+      <!-- Tier radio cards -->
+      <fieldset>
+        <legend class="text-sm font-medium text-[var(--color-ink)] mb-3">
+          Membership tier <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+        </legend>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {membershipLevels.map((level) => (
+            <label class="flex items-start gap-3 rounded-lg border-2 border-[var(--color-paper-dark)] bg-white p-4 cursor-pointer hover:border-[var(--color-accent)] transition has-[:checked]:border-[var(--color-accent)] has-[:checked]:bg-[var(--color-accent-light)]">
+              <input
+                type="radio"
+                name="membership-tier"
+                value={level.id}
+                required
+                class="mt-0.5 h-4 w-4 accent-[var(--color-accent)] shrink-0"
+              />
+              <span>
+                <span class="font-semibold text-[var(--color-ink)] block">{level.name}</span>
+                <span class="text-[var(--color-accent)] font-medium text-sm">
+                  ${level.price} / {level.period === 'year' ? 'year' : 'one-time'}
+                </span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <!-- Referral -->
+      <div>
+        <label for="mem-referral" class={lbl}>
+          How did you hear about us? <span class="text-[var(--color-ink-muted)] font-normal">(optional)</span>
+        </label>
+        <input type="text" id="mem-referral" name="how-did-you-hear" class={inp} />
+      </div>
+
+      <p class="text-xs text-[var(--color-ink-muted)]">
+        Required fields marked <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>. After submitting, you'll be taken to PayPal to complete payment for your selected tier.
       </p>
-      <p class="text-[var(--color-ink)] font-medium">
-        {contact.address.line}
-      </p>
-      <p class="mt-4 text-sm text-[var(--color-ink-muted)]">
-        Include your name, address, and phone number with your payment. Questions? <a href="/contact" class="text-[var(--color-accent)] hover:underline">Contact us</a> or stop by during <a href="/visit" class="text-[var(--color-accent)] hover:underline">museum hours</a>.
-      </p>
-    </div>
+
+      <button
+        id="membership-submit"
+        type="submit"
+        class="w-full inline-flex items-center justify-center rounded-md px-6 py-3 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:opacity-60"
+      >
+        Join and proceed to payment &rarr;
+      </button>
+    </form>
+
+    <p class="mt-6 text-sm text-[var(--color-ink-muted)] max-w-2xl">
+      Prefer to pay by check? Call <a href={`tel:${contact.phone.number.replace(/\D/g, '')}`} class="text-[var(--color-accent)] hover:underline">{contact.phone.number}</a> and we'll get you set up.
+    </p>
   </Section>
 
   <Section title="Volunteering" id="volunteering">
     <p class="text-[var(--color-ink-muted)] mb-4">
-      The best way to get involved is to <a href="/visit" class="text-[var(--color-accent)] hover:underline">visit the museum</a>. If you're interested in volunteering your time, we'd love to hear from you.
+      Volunteers are the heart of the Society. Whether you can spare a few hours a month or more, there's a meaningful way to get involved — greeting visitors, assisting with exhibits, researching local history, or helping at events.
     </p>
-    <p class="text-[var(--color-ink-muted)]">
-      For volunteer opportunities, please <a href="/contact" class="text-[var(--color-accent)] hover:underline">contact us</a> or stop by during museum hours.
+    <a
+      href="/volunteer"
+      class="inline-flex items-center justify-center rounded-md px-5 py-2.5 font-medium border-2 border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent-light)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+    >
+      Apply to volunteer &rarr;
+    </a>
+  </Section>
+
+  <Section title="Stay Connected" id="newsletter">
+    <p class="text-[var(--color-ink-muted)] mb-8 max-w-2xl">
+      Sign up for our newsletter to receive museum news, upcoming events, and stories from Rantoul's history. We still send physical mailings — so we collect your mailing address alongside your email.
     </p>
+    <div class="max-w-2xl">
+      <NewsletterForm />
+    </div>
   </Section>
 
   <Section title="Donations" id="donations">
     <p class="text-[var(--color-ink-muted)] mb-4">
-      Financial contributions help preserve local history and keep the museum accessible. <strong class="text-[var(--color-ink)]">Online donations are not yet available.</strong> We are planning to offer online giving in the future.
+      Financial contributions help preserve local history and keep the museum accessible to everyone. Free-will donations are gratefully accepted when you visit.
     </p>
     <p class="text-[var(--color-ink-muted)] mb-4">
-      <strong class="text-[var(--color-ink)]">In-person donations:</strong> Free-will donations are accepted when you visit the museum. Your support is greatly appreciated.
+      <!-- TODO: Add PayPal Donate button here when client provides PayPal account info. -->
+      <strong class="text-[var(--color-ink)]">Online giving coming soon</strong> — we'll be adding a PayPal donate option shortly.
     </p>
     <p class="text-sm text-[var(--color-ink-muted)]">
-      <strong class="text-[var(--color-ink)]">Planned future options</strong> (not yet active): PayPal Donate, Stripe donation form, Donorbox, or Square payment links. We will announce when online giving is available.
+      The Rantoul Historical Society is a nonprofit organization. Contributions may be tax-deductible to the extent allowed by law.
+      <!-- TODO: Confirm 501(c)(3) status language with client before launch. -->
     </p>
   </Section>
 </BaseLayout>
+
+<script define:vars={{ paypalUrlMap }}>
+  (function () {
+    const form = document.getElementById('membership-form');
+    const submitBtn = document.getElementById('membership-submit');
+    if (!form || !submitBtn) return;
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const selected = form.querySelector('input[name="membership-tier"]:checked');
+      const tierId = selected ? selected.value : null;
+      const paypalUrl = tierId ? paypalUrlMap[tierId] : null;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+
+      try {
+        const formData = new FormData(form);
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString(),
+        });
+      } catch {
+        // Network failure — proceed to PayPal anyway if URL is ready
+      }
+
+      if (paypalUrl && !paypalUrl.startsWith('TODO')) {
+        window.location.href = paypalUrl;
+      } else {
+        window.location.href = '/thank-you';
+      }
+    });
+  })();
+</script>

@@ -3,7 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import Card from '../components/Card.astro';
 import { exhibits } from '../data/exhibits';
-import { getImageAssets } from '../data/image-assets';
+import { getImageAssets, getPublicImageUrl } from '../data/image-assets';
+
+const galleryImages = getImageAssets().filter(
+  (img) => img.category !== 'Facilities'
+);
 ---
 
 <BaseLayout
@@ -32,13 +36,25 @@ import { getImageAssets } from '../data/image-assets';
     </div>
   </Section>
 
-  <Section title="Gallery" id="gallery">
-    <p class="text-[var(--color-ink-muted)] mb-6">
-      A selection of museum photography. All captions and alt text are sourced from the project image registry.
+  <Section title="Museum Gallery" id="gallery">
+    <p class="text-[var(--color-ink-muted)] mb-8">
+      A selection of photographs from our museum collection.
     </p>
-    <!-- Placeholder: full gallery can pull from getImageAssets() and render OptimizedImage when images are imported per page. -->
-    <p class="text-sm text-[var(--color-ink-muted)]">
-      Gallery of {getImageAssets().length} registered images can be expanded here with OptimizedImage components and category filters.
-    </p>
+    <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {galleryImages.map((img) => (
+        <figure>
+          <img
+            src={getPublicImageUrl(img.file_name)}
+            alt={img.alt_text}
+            width="600"
+            height="450"
+            class="rounded-lg w-full h-48 object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption class="mt-2 text-xs text-[var(--color-ink-muted)]">{img.description}</figcaption>
+        </figure>
+      ))}
+    </div>
   </Section>
 </BaseLayout>

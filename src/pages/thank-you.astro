@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Thank You"
+  description="Thank you for contacting the Rantoul Historical Society."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Thank You</h1>
+    </div>
+  </header>
+
+  <section class="py-12 md:py-16 px-4">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="text-lg text-[var(--color-ink-muted)] mb-6">
+        Your submission has been received. We appreciate your interest in the Rantoul Historical Society.
+      </p>
+      <p class="text-[var(--color-ink-muted)] mb-8">
+        If you have any questions in the meantime, please <a href="/contact" class="text-[var(--color-accent)] hover:underline">contact us</a> or visit us during <a href="/visit" class="text-[var(--color-accent)] hover:underline">museum hours</a>.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center rounded-md px-6 py-3 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+      >
+        Return home
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+---
+
+<BaseLayout
+  title="Illinois Library Grant"
+  description="The Rantoul Historical Society is grateful for support from the Illinois State Library grant program."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Illinois Library Grant</h1>
+      <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+        Grant support from the Illinois State Library helps the Society preserve and share Rantoul's history.
+      </p>
+    </div>
+  </header>
+
+  <Section id="grant-overview" narrow>
+    <!-- TODO: Confirm grant program name with client (e.g., LSTA, Illinois Heritage Digitization Project, or other). -->
+    <p class="mb-6 text-[var(--color-ink-muted)]">
+      The Rantoul Historical Society is grateful to receive support through a grant from the Illinois State Library, a Division of the Office of the Illinois Secretary of State.
+    </p>
+
+    <!-- TODO: Insert one paragraph describing what the grant funds specifically
+         (e.g., digitization of historical photographs and documents, exhibit improvements,
+          cataloging collections, accessibility upgrades). Content to be provided by client. -->
+    <p class="mb-6 text-[var(--color-ink-muted)]">
+      <em class="text-[var(--color-ink-muted)]">[TODO: Description of grant purpose and how funds are being used — to be provided by client.]</em>
+    </p>
+
+    <p class="mb-6 text-[var(--color-ink-muted)]">
+      The Illinois State Library administers state and federal grant programs to libraries and library-affiliated organizations throughout Illinois. These grants support preservation, access, and public engagement with historical and cultural materials — enabling community organizations like ours to continue serving residents and researchers.
+    </p>
+
+    <!-- TODO: Include grant award year, amount (if appropriate to publish), and any
+         required acknowledgment language per grant terms. -->
+    <p class="text-[var(--color-ink-muted)]">
+      We are honored to receive this support and grateful to the Illinois State Library for investing in the preservation of Rantoul's history for future generations.
+    </p>
+  </Section>
+
+  <Section id="grant-back" narrow>
+    <p>
+      <a href="/about" class="text-[var(--color-accent)] hover:underline font-medium">← Back to About</a>
+    </p>
+  </Section>
+</BaseLayout>

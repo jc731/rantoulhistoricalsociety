@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+---
+
+<BaseLayout
+  title="Newsletter"
+  description="Sign up for the Rantoul Historical Society newsletter. Stay informed about museum news, events, and local history."
+>
+  <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-heading text-3xl md:text-4xl font-bold text-[var(--color-ink)]">Stay Connected</h1>
+      <p class="mt-4 text-lg text-[var(--color-ink-muted)]">
+        Sign up to receive news, updates, and event invitations from the Rantoul Historical Society.
+      </p>
+    </div>
+  </header>
+
+  <Section id="newsletter-form" narrow>
+    <p class="text-[var(--color-ink-muted)] mb-8">
+      We send periodic mailings about museum news, upcoming events, and stories from Rantoul's history. We respect your privacy and will never share your information.
+    </p>
+    <NewsletterForm />
+  </Section>
+</BaseLayout>

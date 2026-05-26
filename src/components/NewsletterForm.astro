@@ -1,0 +1,94 @@
+---
+// Rendered on both /newsletter and embedded in /support.
+// Netlify deduplicates by form name="newsletter" — both pages submit to the same form inbox.
+const input = 'w-full rounded border border-[var(--color-paper-dark)] bg-white px-3 py-2.5 text-sm text-[var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2';
+const label = 'block text-sm font-medium text-[var(--color-ink)] mb-1';
+---
+
+<form
+  name="newsletter"
+  method="POST"
+  action="/thank-you"
+  data-netlify="true"
+  data-netlify-honeypot="bot-field"
+  class="space-y-5"
+>
+  <input type="hidden" name="form-name" value="newsletter" />
+  <p class="hidden" aria-hidden="true">
+    <label>Do not fill this out: <input name="bot-field" /></label>
+  </p>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="nl-first-name" class={label}>
+        First name <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+      </label>
+      <input type="text" id="nl-first-name" name="first-name" required autocomplete="given-name" class={input} />
+    </div>
+    <div>
+      <label for="nl-last-name" class={label}>
+        Last name <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+      </label>
+      <input type="text" id="nl-last-name" name="last-name" required autocomplete="family-name" class={input} />
+    </div>
+  </div>
+
+  <div>
+    <label for="nl-email" class={label}>
+      Email address <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+    </label>
+    <input type="email" id="nl-email" name="email" required autocomplete="email" class={input} />
+  </div>
+
+  <div>
+    <label for="nl-street" class={label}>
+      Street address <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+    </label>
+    <input type="text" id="nl-street" name="street-address" required autocomplete="street-address" class={input} />
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-3">
+    <div>
+      <label for="nl-city" class={label}>
+        City <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+      </label>
+      <input type="text" id="nl-city" name="city" required autocomplete="address-level2" class={input} />
+    </div>
+    <div>
+      <label for="nl-state" class={label}>
+        State <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+      </label>
+      <input type="text" id="nl-state" name="state" required value="IL" maxlength="2" autocomplete="address-level1" class={input} />
+    </div>
+    <div>
+      <label for="nl-zip" class={label}>
+        ZIP code <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+      </label>
+      <input type="text" id="nl-zip" name="zip" required inputmode="numeric" maxlength="10" autocomplete="postal-code" class={input} />
+    </div>
+  </div>
+
+  <div class="flex items-start gap-3">
+    <input
+      type="checkbox"
+      id="nl-events"
+      name="event-invitations"
+      value="yes"
+      class="mt-0.5 h-4 w-4 rounded border-[var(--color-paper-dark)] accent-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+    />
+    <label for="nl-events" class="text-sm text-[var(--color-ink-muted)]">
+      I'd also like to receive event invitations
+    </label>
+  </div>
+
+  <p class="text-xs text-[var(--color-ink-muted)]">
+    Required fields marked <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>. Mailing address is collected because the Society still sends physical mailings.
+  </p>
+
+  <button
+    type="submit"
+    class="inline-flex items-center justify-center rounded-md px-6 py-3 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
+  >
+    Subscribe to newsletter
+  </button>
+</form>
