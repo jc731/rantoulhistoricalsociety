@@ -18,36 +18,43 @@ import { staff } from '../data/staff';
   </header>
 
   <Section id="staff-list" narrow>
-    <!-- TODO: Replace placeholder entries with real staff data from client.
-         Update src/data/staff.ts — no code changes needed here. -->
-    <div class="space-y-8">
-      {staff.map((member) => (
-        <div class="flex flex-col sm:flex-row gap-5 rounded-lg border border-[var(--color-paper-dark)] bg-white p-5">
-          {member.photo ? (
-            <div class="shrink-0">
-              <img
-                src={`/images/${member.photo}`}
-                alt={`Photo of ${member.name}`}
-                width="96"
-                height="96"
-                class="rounded-full w-24 h-24 object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+    {staff.length > 0 ? (
+      <div class="space-y-8">
+        {staff.map((member) => (
+          <div class="flex flex-col sm:flex-row gap-5 rounded-lg border border-[var(--color-paper-dark)] bg-white p-5">
+            {member.photo ? (
+              <div class="shrink-0">
+                <img
+                  src={`/images/${member.photo}`}
+                  alt={`Photo of ${member.name}`}
+                  width="96"
+                  height="96"
+                  class="rounded-full w-24 h-24 object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ) : (
+              <div class="shrink-0 w-24 h-24 rounded-full bg-[var(--color-paper-dark)] flex items-center justify-center" aria-hidden="true">
+                <span class="text-3xl text-[var(--color-ink-muted)]">?</span>
+              </div>
+            )}
+            <div>
+              <h2 class="font-heading text-lg font-semibold text-[var(--color-ink)]">{member.name}</h2>
+              <p class="text-sm text-[var(--color-accent)] font-medium mb-2">{member.role}</p>
+              <p class="text-sm text-[var(--color-ink-muted)]">{member.bio}</p>
             </div>
-          ) : (
-            <div class="shrink-0 w-24 h-24 rounded-full bg-[var(--color-paper-dark)] flex items-center justify-center" aria-hidden="true">
-              <span class="text-3xl text-[var(--color-ink-muted)]">?</span>
-            </div>
-          )}
-          <div>
-            <h2 class="font-heading text-lg font-semibold text-[var(--color-ink)]">{member.name}</h2>
-            <p class="text-sm text-[var(--color-accent)] font-medium mb-2">{member.role}</p>
-            <p class="text-sm text-[var(--color-ink-muted)]">{member.bio}</p>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    ) : (
+      <div class="rounded-lg border border-[var(--color-paper-dark)] bg-white p-8 text-center">
+        <p class="text-[var(--color-ink)] font-medium mb-2">Staff profiles coming soon.</p>
+        <p class="text-sm text-[var(--color-ink-muted)]">
+          We're a volunteer-run organization. Check back shortly to meet the people who keep the museum going.
+        </p>
+      </div>
+    )}
 
     <div class="mt-10 rounded-lg bg-[var(--color-paper-dark)] p-5">
       <p class="text-[var(--color-ink-muted)]">
