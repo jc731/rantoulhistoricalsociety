@@ -2,11 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import { contact } from '../data/contact';
+
+const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(contact.address.line)}`;
 ---
 
 <BaseLayout
   title="Visit"
-  description="Visit the Rantoul Historical Society Museum at 1040 Klein Ave., Rantoul, IL. Free admission. Open Tue, Fri, Sat 10 AM–5 PM; Sun 12–4 PM."
+  description="Visit the Rantoul Historical Society Museum at 1040 Klein Ave., Rantoul, IL. Free admission. Open Tue, Fri & Sat 10 AM–3 PM; Sun 12–3 PM."
 >
   <header class="bg-[var(--color-paper-dark)] py-12 md:py-16 px-4 text-center">
     <div class="mx-auto max-w-3xl">
@@ -17,25 +19,46 @@ import { contact } from '../data/contact';
     </div>
   </header>
 
-  <Section title="Location" id="location">
-    <p class="text-[var(--color-ink)] font-medium">
-      {contact.address.line}
-    </p>
-    <p class="mt-2 text-sm text-[var(--color-ink-muted)]">
-      Directions and parking information available upon request.
-    </p>
-  </Section>
+  <!-- Building exterior so visitors can recognize the place -->
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 pt-8">
+    <img
+      src="/images/rantoul-historical-society-museum-building-exterior.jpg"
+      alt="Exterior view of the Rantoul Historical Society & Museum building."
+      width="1200"
+      height="600"
+      class="rounded-lg w-full h-auto"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 
-  <Section title="Admission" id="admission">
-    <p class="text-[var(--color-ink-muted)]">
-      Admission is free. Free-will donations are appreciated and help support preservation efforts.
-    </p>
+  <Section id="location-admission">
+    <div class="grid gap-8 sm:grid-cols-2">
+      <div>
+        <h2 class="font-heading text-xl font-semibold text-[var(--color-ink)] mb-3">Location</h2>
+        <address class="not-italic text-[var(--color-ink)] font-medium mb-3">
+          {contact.address.street}<br />
+          {contact.address.city}, {contact.address.state} {contact.address.zip}
+        </address>
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+        >
+          Get directions →
+        </a>
+      </div>
+      <div>
+        <h2 class="font-heading text-xl font-semibold text-[var(--color-ink)] mb-3">Admission</h2>
+        <p class="text-[var(--color-ink-muted)]">
+          Admission is free. Free-will donations are appreciated and help support preservation efforts.
+        </p>
+      </div>
+    </div>
   </Section>
 
   <Section title="Hours" id="hours">
-    <p class="text-[var(--color-ink-muted)] mb-4">
-      {contact.hoursNote}
-    </p>
     <table class="w-full max-w-sm border border-[var(--color-paper-dark)] text-[var(--color-ink)]" aria-label="Museum hours by day">
       <thead>
         <tr class="bg-[var(--color-paper-dark)]">
@@ -56,15 +79,70 @@ import { contact } from '../data/contact';
       href={contact.facebook}
       target="_blank"
       rel="noopener noreferrer"
-      class="mt-4 inline-block text-[var(--color-accent)] font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+      class="mt-4 inline-block text-sm text-[var(--color-accent)] font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
     >
-      Check our Facebook page for updates →
+      Check our Facebook page for schedule updates →
     </a>
   </Section>
 
   <Section title="What to Expect" id="expect">
-    <p class="text-[var(--color-ink-muted)]">
-      The museum houses artifacts, photographs, documents, and memorabilia that tell the story of Rantoul and the surrounding area. Exhibits cover themes including early settlement, the railroad, Chanute Air Force Base, local businesses and civic life, and family histories. We recommend allowing at least an hour for your visit.
-    </p>
+    <div class="grid gap-8 sm:grid-cols-2 items-start">
+      <div>
+        <p class="text-[var(--color-ink-muted)] mb-4">
+          The museum houses artifacts, photographs, documents, and memorabilia that tell the story of Rantoul and the surrounding area. Exhibits cover themes including early settlement, the railroad, Chanute Air Force Base, local businesses and civic life, and family histories.
+        </p>
+        <p class="text-[var(--color-ink-muted)]">
+          We recommend allowing at least an hour for your visit.
+        </p>
+      </div>
+      <figure>
+        <img
+          src="/images/sandy-mechanical-horse-ride-rantoul-museum.jpg"
+          alt="A vintage Sandy mechanical horse ride in front of a museum counter."
+          width="600"
+          height="400"
+          class="rounded-lg w-full h-auto"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-2 text-xs text-[var(--color-ink-muted)]">Vintage Sandy the mechanical horse — a favorite for young visitors.</figcaption>
+      </figure>
+    </div>
+  </Section>
+
+  <Section title="Get in Touch" id="contact">
+    <div class="rounded-lg border border-[var(--color-paper-dark)] bg-[var(--color-paper-dark)] p-6 max-w-lg">
+      <dl class="space-y-4">
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-muted)] mb-0.5">Phone</dt>
+          <dd class="text-[var(--color-ink)]">
+            {contact.phone.name}: <a
+              href={`tel:${contact.phone.number.replace(/\D/g, '')}`}
+              class="text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+            >{contact.phone.number}</a>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-muted)] mb-0.5">Email</dt>
+          <dd>
+            <a
+              href={`mailto:${contact.email}`}
+              class="text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+            >{contact.email}</a>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wide text-[var(--color-ink-muted)] mb-0.5">Social</dt>
+          <dd>
+            <a
+              href={contact.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+            >Rantoul Historical Society on Facebook</a>
+          </dd>
+        </div>
+      </dl>
+    </div>
   </Section>
 </BaseLayout>

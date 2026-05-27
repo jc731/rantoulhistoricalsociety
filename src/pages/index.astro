@@ -44,23 +44,49 @@ const buildingAsset = getHomeBannerAsset();
         <figcaption class="mt-2 text-sm text-[var(--color-ink-muted)]">{buildingAsset.description}</figcaption>
       </figure>
     )}
-    <p class="text-[var(--color-ink-muted)] mb-6">
+    <p class="text-[var(--color-ink-muted)] mb-6 max-w-2xl">
       Our exhibits highlight themes such as early settlement and town development, the railroad and its role in shaping Rantoul, Chanute Air Force Base and its impact on the community, and local businesses, schools, and civic life. Family histories and personal artifacts donated by residents bring these stories to life.
     </p>
+    <div class="grid grid-cols-3 gap-3 max-w-2xl mb-6" aria-hidden="true">
+      <img
+        src="/images/illinois-central-railroad-museum-display-rantoul.jpg"
+        alt=""
+        width="300"
+        height="225"
+        class="rounded w-full h-24 object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        src="/images/rantoul-historical-society-one-room-schoolhouse-exhibit.jpg"
+        alt=""
+        width="300"
+        height="225"
+        class="rounded w-full h-24 object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        src="/images/rantoul-agricultural-history-plows-exhibit.jpg"
+        alt=""
+        width="300"
+        height="225"
+        class="rounded w-full h-24 object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
     <a href="/exhibits" class="text-[var(--color-accent)] font-medium hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded">
       Explore exhibits →
     </a>
   </Section>
 
   <Section title="Plan a Visit" id="visit">
-    <p class="text-[var(--color-ink-muted)] mb-4">
+    <p class="text-[var(--color-ink-muted)] mb-6">
       We're located at <strong class="text-[var(--color-ink)]">1040 Klein Avenue, Rantoul, Illinois</strong>. Admission is free; free-will donations are appreciated.
     </p>
-    <p class="text-[var(--color-ink-muted)] mb-4">
-      Open Tue, Fri &amp; Sat 10 AM–3 PM; Sun 12–3 PM. <a href="/visit" class="text-[var(--color-accent)] hover:underline">Full hours</a> and <a href="/contact" class="text-[var(--color-accent)] hover:underline">contact info</a>.
-    </p>
     <a href="/visit" class="inline-flex items-center justify-center rounded-md px-5 py-2.5 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2">
-      Visit details
+      Hours, location &amp; contact →
     </a>
   </Section>
 

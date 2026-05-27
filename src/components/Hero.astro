@@ -19,7 +19,7 @@ const { headline, intro, bannerFileName, bannerAlt, primaryCta, secondaryCta, su
 
 <header class="relative bg-[var(--color-paper-dark)] py-16 md:py-24 px-4 text-center overflow-hidden">
   {bannerFileName && bannerAlt && (
-    <div class="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+    <div class="hidden md:flex absolute inset-0 items-center justify-center" aria-hidden="true">
       <img
         src={`/images/${bannerFileName}`}
         alt=""
