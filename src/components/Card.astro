@@ -9,7 +9,7 @@ interface Props {
 const { title, href, class: className = '' } = Astro.props;
 ---
 
-<div class={`rounded-lg border border-[var(--color-paper-dark)] bg-white p-5 shadow-sm ${className}`}>
+<div class={`card-accent rounded-lg border border-[var(--color-paper-dark)] bg-white p-5 shadow-sm ${className}`}>
   {href ? (
     <a href={href} class="block group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded-lg -m-5 p-5">
       <h3 class="font-heading text-lg font-semibold text-[var(--color-accent)] group-hover:underline">

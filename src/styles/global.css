@@ -8,10 +8,13 @@
   /* Dark ink text */
   --color-ink: #1a1a1a;
   --color-ink-muted: #4a4a4a;
-  /* Accent — use sparingly for links/buttons (inspired by classic museum tone) */
+  /* Primary accent — links/buttons (warm museum brown) */
   --color-accent: #6b4e3d;
   --color-accent-hover: #5a4032;
   --color-accent-light: #e8e2dc;
+  /* Secondary accent — decorative highlights (aged brass/amber) */
+  --color-accent-2: #b45309;
+  --color-accent-2-light: #fef3c7;
   /* Typography */
   --font-heading: 'Georgia', 'Times New Roman', serif;
   --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -60,4 +63,13 @@ h1, h2, h3, h4 {
 }
 .skip-link:focus {
   top: 0.5rem;
+}
+
+/* Secondary accent: card hover top-edge reveal */
+.card-accent {
+  border-top: 3px solid transparent;
+  transition: border-top-color 0.15s ease;
+}
+.card-accent:hover {
+  border-top-color: var(--color-accent-2);
 }

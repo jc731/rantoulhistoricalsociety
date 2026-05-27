@@ -8,6 +8,12 @@ import { getImageAssets, getPublicImageUrl } from '../data/image-assets';
 const galleryImages = getImageAssets().filter(
   (img) => img.category !== 'Facilities'
 );
+
+function parseDims(dimensions: string): { w: number; h: number } {
+  const match = dimensions.match(/^(\d+)x(\d+)$/);
+  if (match) return { w: parseInt(match[1]), h: parseInt(match[2]) };
+  return { w: 1200, h: 900 };
+}
 ---
 
 <BaseLayout
@@ -38,23 +44,89 @@ const galleryImages = getImageAssets().filter(
 
   <Section title="Museum Gallery" id="gallery">
     <p class="text-[var(--color-ink-muted)] mb-8">
-      A selection of photographs from our museum collection.
+      A selection of photographs from our museum collection. Click any image to view full size.
     </p>
-    <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-      {galleryImages.map((img) => (
-        <figure>
-          <img
-            src={getPublicImageUrl(img.file_name)}
-            alt={img.alt_text}
-            width="600"
-            height="450"
-            class="rounded-lg w-full h-48 object-cover"
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption class="mt-2 text-xs text-[var(--color-ink-muted)]">{img.description}</figcaption>
-        </figure>
-      ))}
+    <div id="pswp-gallery" class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+      {galleryImages.map((img) => {
+        const dims = parseDims(img.dimensions);
+        return (
+          <figure>
+            <a
+              href={getPublicImageUrl(img.file_name)}
+              data-pswp-width={dims.w}
+              data-pswp-height={dims.h}
+              data-caption={img.description}
+              class="block cursor-zoom-in rounded-lg overflow-hidden"
+            >
+              <img
+                src={getPublicImageUrl(img.file_name)}
+                alt={img.alt_text}
+                width="600"
+                height="450"
+                class="w-full h-48 object-cover transition-transform duration-200 hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption class="mt-2">
+              <span class="text-[10px] font-semibold uppercase tracking-wide text-[var(--color-accent-2)]">{img.category}</span>
+              <p class="text-xs text-[var(--color-ink-muted)] mt-0.5">{img.description}</p>
+            </figcaption>
+          </figure>
+        );
+      })}
     </div>
   </Section>
 </BaseLayout>
+
+<style is:global>
+  @import 'photoswipe/style.css';
+
+  .pswp__custom-caption {
+    background: rgba(0, 0, 0, 0.65);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: #fff;
+    max-width: 480px;
+    padding: 6px 14px;
+    border-radius: 4px;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .pswp__custom-caption:empty {
+    display: none;
+  }
+</style>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#pswp-gallery',
+    children: 'a',
+    pswpModule: () => import('photoswipe'),
+    preload: [1, 2],
+  });
+
+  lightbox.on('uiRegister', function () {
+    lightbox.pswp.ui.registerElement({
+      name: 'custom-caption',
+      order: 9,
+      isButton: false,
+      appendTo: 'root',
+      onInit: (el, pswp) => {
+        pswp.on('change', () => {
+          const slide = pswp.currSlide?.data?.element;
+          el.textContent = slide?.dataset?.caption ?? '';
+        });
+      },
+    });
+  });
+
+  lightbox.init();
+</script>
