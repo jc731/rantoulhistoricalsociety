@@ -12,6 +12,7 @@ const lbl = 'block text-sm font-medium text-[var(--color-ink)] mb-1';
 const paypalUrlMap = Object.fromEntries(
   membershipLevels.map((lvl) => [lvl.id, lvl.paypal_url])
 );
+const paypalPending = membershipLevels.every((lvl) => lvl.paypal_url.startsWith('TODO'));
 ---
 
 <BaseLayout
@@ -67,7 +68,9 @@ const paypalUrlMap = Object.fromEntries(
   <!-- Membership sign-up form -->
   <Section title="Join the Society" id="join">
     <p class="text-[var(--color-ink-muted)] mb-8 max-w-2xl">
-      Fill out the form below and you'll be taken to PayPal to complete payment for your selected tier.
+      {paypalPending
+        ? "Fill out the form below and we'll be in touch to finalize your membership."
+        : "Fill out the form below and you'll be taken to PayPal to complete payment for your selected tier."}
     </p>
 
     <form
@@ -180,7 +183,7 @@ const paypalUrlMap = Object.fromEntries(
       </div>
 
       <p class="text-xs text-[var(--color-ink-muted)]">
-        Required fields marked <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>. After submitting, you'll be taken to PayPal to complete payment for your selected tier.
+        Required fields marked <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>.{paypalPending ? "" : " After submitting, you'll be taken to PayPal to complete payment for your selected tier."}
       </p>
 
       <button
@@ -188,7 +191,7 @@ const paypalUrlMap = Object.fromEntries(
         type="submit"
         class="w-full inline-flex items-center justify-center rounded-md px-6 py-3 font-medium bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:opacity-60"
       >
-        Join and proceed to payment &rarr;
+        {paypalPending ? <>Sign up &rarr;</> : <>Join and proceed to payment &rarr;</>}
       </button>
     </form>
 
@@ -263,7 +266,7 @@ const paypalUrlMap = Object.fromEntries(
       if (paypalUrl && !paypalUrl.startsWith('TODO')) {
         window.location.href = paypalUrl;
       } else {
-        window.location.href = '/thank-you';
+        window.location.href = '/thank-you?type=membership-pending';
       }
     });
   })();
