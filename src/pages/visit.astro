@@ -83,6 +83,13 @@ const mapsUrl = `https://maps.google.com/?q=${encodeURIComponent(contact.address
     >
       Check our Facebook page for schedule updates →
     </a>
+    <p class="mt-4 text-sm text-[var(--color-ink-muted)]">
+      Hoping to visit outside these hours? We'd love to have you —
+      <a
+        href={`tel:${contact.phone.number.replace(/\D/g, '')}`}
+        class="text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 rounded"
+      >give us a call</a> and we'll arrange a time.
+    </p>
   </Section>
 
   <Section title="What to Expect" id="expect">

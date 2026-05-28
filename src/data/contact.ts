@@ -19,13 +19,13 @@ export const contact = {
   /** Structured hours for display. Empty string = closed. */
   hoursSchedule: [
     { day: 'Monday', open: '', close: '', closed: true },
-    { day: 'Tuesday', open: '10:00 AM', close: '3:00 PM', closed: false },
+    { day: 'Tuesday', open: '10:00 AM', close: '4:00 PM', closed: false },
     { day: 'Wednesday', open: '', close: '', closed: true },
     { day: 'Thursday', open: '', close: '', closed: true },
-    { day: 'Friday', open: '10:00 AM', close: '3:00 PM', closed: false },
-    { day: 'Saturday', open: '10:00 AM', close: '3:00 PM', closed: false },
-    { day: 'Sunday', open: '12:00 PM', close: '3:00 PM', closed: false },
+    { day: 'Friday', open: '10:00 AM', close: '4:00 PM', closed: false },
+    { day: 'Saturday', open: '10:00 AM', close: '4:00 PM', closed: false },
+    { day: 'Sunday', open: '12:00 PM', close: '4:00 PM', closed: false },
   ] as const,
   /** Short note for footer; full schedule shown on Visit/Contact. */
-  hoursNote: 'Tue, Fri & Sat 10 AM–3 PM; Sun 12–3 PM. Mon, Wed & Thu closed.',
+  hoursNote: 'Tue, Fri & Sat 10 AM–4 PM; Sun 12–4 PM. Mon, Wed & Thu closed.',
 } as const;
