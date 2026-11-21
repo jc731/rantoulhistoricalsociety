@@ -102,7 +102,7 @@ Images in `src/images/` are used with the registry in `image-assets.json` for al
 | chanute-air-force-base-commemorative-mug-rantoul.jpg | ✓ | Available |
 | illinois-central-railroad-museum-display-rantoul.jpg | ✓ | Available |
 | rantoul-agricultural-history-plows-exhibit.jpg | ✓ | Available |
-| sandy-mechanical-horse-ride-rantoul-museum.jpg | ✓ | Available |
+| cyclone-mechanical-horse-ride-rantoul-museum.jpg | ✓ | Available |
 | vintage-magneto-wall-telephones-collection.jpg | ✓ | Available |
 | — | vintage-print-shop-potbelly-stove-museum.jpg | **Not in registry** — add to `image-assets.json` if you want to use it on the site |
 
